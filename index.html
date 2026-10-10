@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>PaharLink - Cabs & Sightseeing Tours</title>
+  <meta name="description" content="Two-Way Airport Return Cabs & Complete Sightseeing Tours (Nathula, Changu, Tiger Hill, Mirik, North Sikkim)." />
+
+  <!-- Social Preview Tags -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="PaharLink • Return Cabs & Sightseeing Packages" />
+  <meta property="og:description" content="Direct Bagdogra return cabs + authentic Darjeeling & Sikkim tours (Nathula, Changu, Mirik, North Sikkim). Direct local rates via WhatsApp." />
+  <meta property="og:url" content="https://impulsivehimalayastours-source.github.io/PaharLink/" />
+  <meta property="og:image" content="https://impulsivehimalayastours-source.github.io/PaharLink/preview.jpg" />
+  <meta property="og:image:secure_url" content="https://impulsivehimalayastours-source.github.io/PaharLink/preview.jpg" />
+  <meta property="og:image:type" content="image/jpeg" />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+</head>
+<body class="bg-slate-100 text-slate-800 font-sans min-h-screen p-3 md:p-6 flex flex-col justify-between">
+
+  <div class="max-w-lg mx-auto w-full bg-white rounded-3xl shadow-sm border border-slate-200 overflow-hidden">
+    <!-- Header -->
+    <div class="bg-indigo-950 text-white p-5">
+      <div class="flex items-center space-x-2.5">
+        <i class="fa-solid fa-mountain-sun text-amber-400 text-2xl"></i>
+        <div>
+          <h1 class="text-xl font-bold tracking-tight">PaharLink</h1>
+          <p class="text-[11px] text-amber-300 font-medium">Return Cabs • Sightseeing • Sikkim Permits</p>
+        </div>
+      </div>
+      <p class="text-xs text-indigo-200 mt-2">Verified Mountain Drivers • Direct Tariffs • Customized Tour Plans</p>
+    </div>
+
+    <!-- Mode Selector: Transfer vs Sightseeing -->
+    <div class="p-4 bg-slate-50 border-b border-slate-200 flex gap-2">
+      <button id="tabTransfer" onclick="setMode('transfer')" class="flex-1 py-2.5 px-3 rounded-xl text-xs font-bold bg-indigo-900 text-white shadow-sm flex items-center justify-center gap-1.5 transition">
+        <i class="fa-solid fa-taxi"></i> Airport / Return Cabs
+      </button>
+      <button id="tabTour" onclick="setMode('tour')" class="flex-1 py-2.5 px-3 rounded-xl text-xs font-bold bg-white text-slate-700 border border-slate-300 hover:bg-slate-100 flex items-center justify-center gap-1.5 transition">
+        <i class="fa-solid fa-compass"></i> Sightseeing Packages
+      </button>
+    </div>
+
+    <!-- FORM 1: AIRPORT & INTER-CITY CABS -->
+    <form id="formTransfer" onsubmit="sendTransferToWhatsApp(event)" class="p-5 space-y-4">
+      <div>
+        <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Select Route</label>
+        <select id="transferRoute" class="w-full border border-slate-200 rounded-xl p-3 text-xs bg-slate-50 font-medium focus:ring-2 focus:ring-emerald-500" required>
+          <option value="Bagdogra Airport (IXB) to Darjeeling">Bagdogra Airport (IXB) ➔ Darjeeling</option>
+          <option value="Darjeeling to Bagdogra Airport (IXB)">Darjeeling ➔ Bagdogra Airport (IXB)</option>
+          <option value="Bagdogra Airport (IXB) to Gangtok">Bagdogra Airport (IXB) ➔ Gangtok</option>
+          <option value="Gangtok to Bagdogra Airport (IXB)">Gangtok ➔ Bagdogra Airport (IXB)</option>
+          <option value="Bagdogra Airport (IXB) to Kalimpong">Bagdogra Airport (IXB) ➔ Kalimpong</option>
+          <option value="Kalimpong to Bagdogra Airport (IXB)">Kalimpong ➔ Bagdogra Airport (IXB)</option>
+          <option value="Bagdogra Airport (IXB) to Pelling">Bagdogra Airport (IXB) ➔ Pelling</option>
+          <option value="Pelling to Bagdogra Airport (IXB)">Pelling ➔ Bagdogra Airport (IXB)</option>
+          <option value="Bagdogra Airport (IXB) to Siliguri">Bagdogra Airport (IXB) ➔ Siliguri</option>
+          <option value="Bagdogra Airport (IXB) to Jaigaon (Bhutan Border)">Bagdogra Airport (IXB) ➔ Jaigaon (Bhutan Border)</option>
+          <option value="Bagdogra Airport (IXB) to Kakarvitta (Nepal Border)">Bagdogra Airport (IXB) ➔ Kakarvitta (Nepal Border)</option>
+        </select>
+      </div>
+
+      <div class="grid grid-cols-2 gap-3">
+        <div>
+          <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Date</label>
+          <input type="date" id="transferDate" required class="w-full border border-slate-200 rounded-xl p-2.5 text-xs bg-slate-50 font-medium" />
+        </div>
+        <div>
+          <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Time / Landing</label>
+          <input type="time" id="transferTime" required class="w-full border border-slate-200 rounded-xl p-2.5 text-xs bg-slate-50 font-medium" />
+        </div>
+      </div>
+
+      <div>
+        <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Flight / Train No. (Optional)</label>
+        <input type="text" id="transferFlight" placeholder="e.g., IndiGo 6E-242 / AI-879" class="w-full border border-slate-200 rounded-xl p-2.5 text-xs bg-slate-50 font-medium" />
+      </div>
+
+      <div class="grid grid-cols-2 gap-3">
+        <div>
+          <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Guests</label>
+          <select id="transferPax" class="w-full border border-slate-200 rounded-xl p-2.5 text-xs bg-slate-50 font-medium">
+            <option value="1-2 Guests">1 - 2 Guests</option>
+            <option value="3-4 Guests">3 - 4 Guests</option>
+            <option value="5-7 Guests">5 - 7 Guests</option>
+          </select>
+        </div>
+        <div>
+          <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Luggage Bags</label>
+          <select id="transferBags" class="w-full border border-slate-200 rounded-xl p-2.5 text-xs bg-slate-50 font-medium">
+            <option value="1-2 Bags">1 - 2 Bags</option>
+            <option value="3-4 Bags">3 - 4 Bags</option>
+            <option value="5+ Bags (Carrier)">5+ Bags (Carrier)</option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Vehicle Preference</label>
+        <select id="transferVehicle" class="w-full border border-slate-200 rounded-xl p-2.5 text-xs bg-slate-50 font-medium">
+          <option value="Innova / Crysta (Spacious Comfort)">Innova / Crysta (Spacious Comfort)</option>
+          <option value="Scorpio / Bolero (Hill SUV)">Scorpio / Bolero (Hill Standard)</option>
+          <option value="Sedan / Hatchback (Dzire/Etios)">Sedan (Dzire / Etios - Budget)</option>
+          <option value="Lowest Fare Empty Return Option">Any Available Empty Return Cab (Lowest Tariff)</option>
+        </select>
+      </div>
+
+      <button type="submit" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3.5 px-4 rounded-2xl flex items-center justify-center gap-2 shadow-sm transition active:scale-95">
+        <i class="fa-brands fa-whatsapp text-lg"></i>
+        <span>Check Available Return Cab on WhatsApp</span>
+      </button>
+    </form>
+
+    <!-- FORM 2: SIGHTSEEING & TOUR PACKAGES -->
+    <form id="formTour" onsubmit="sendTourToWhatsApp(event)" class="hidden p-5 space-y-4">
+      <div>
+        <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Choose Sightseeing / Tour Package</label>
+        <select id="tourPackage" class="w-full border border-slate-200 rounded-xl p-3 text-xs bg-slate-50 font-medium focus:ring-2 focus:ring-emerald-500" required>
+          <optgroup label="Sikkim High Altitude & Excursions">
+            <option value="Tsomgo (Changu) Lake, Baba Mandir & Nathula Pass (Full Day)">Changu Lake, Baba Mandir & Nathula Pass (Permit Included)</option>
+            <option value="Gangtok City Tour (Tashi View Point, Monasteries, Ropeway)">Gangtok Local Sightseeing (Full Day)</option>
+            <option value="North Sikkim Tour (Lachen, Lachung, Yumthang & Gurudongmar)">North Sikkim Package (2N/3D or 3N/4D Excursion)</option>
+            <option value="Namchi & Ravangla (Char Dham & Buddha Park)">Namchi Char Dham & Ravangla Buddha Park</option>
+          </optgroup>
+          <optgroup label="Darjeeling Sightseeing">
+            <option value="Tiger Hill Sunrise Tour (Tiger Hill, Batasia Loop, Ghoom)">Tiger Hill Sunrise Tour (Early Morning 4 AM)</option>
+            <option value="Darjeeling Mixed 7-Points Sightseeing (HMI, Zoo, Ropeway, Tea Estate)">Darjeeling 7-Point Sightseeing Tour</option>
+            <option value="Mirik Lake & Pashupati Nagar (Indo-Nepal Border) Excursion">Mirik Lake & Indo-Nepal Border Day Trip</option>
+            <option value="Lamahatta Eco Park, Tinchuley & Triveni Confluence">Lamahatta, Tinchuley & Teesta Triveni Day Tour</option>
+          </optgroup>
+          <optgroup label="Kalimpong & West Sikkim">
+            <option value="Kalimpong Local Sightseeing (Deolo Hill, Durpin Monastery, Pine View)">Kalimpong Local Sightseeing Tour</option>
+            <option value="Pelling Sightseeing (Skywalk, Rabdentse, Kanchenjunga Falls)">Pelling Skywalk & Heritage Sightseeing</option>
+          </optgroup>
+          <optgroup label="Customized Package">
+            <option value="Custom 4 to 7 Days Sikkim-Darjeeling Full Tour Plan">Custom Multi-Day Full Tour Plan (Cab + Hotels/Homestays)</option>
+          </optgroup>
+        </select>
+      </div>
+
+      <div class="grid grid-cols-2 gap-3">
+        <div>
+          <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Starting Date</label>
+          <input type="date" id="tourDate" required class="w-full border border-slate-200 rounded-xl p-2.5 text-xs bg-slate-50 font-medium" />
+        </div>
+        <div>
+          <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Pickup Location</label>
+          <input type="text" id="tourPickup" placeholder="e.g. Gangtok Hotel / Darjeeling" required class="w-full border border-slate-200 rounded-xl p-2.5 text-xs bg-slate-50 font-medium" />
+        </div>
+      </div>
+
+      <div class="grid grid-cols-2 gap-3">
+        <div>
+          <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Total Travelers</label>
+          <select id="tourPax" class="w-full border border-slate-200 rounded-xl p-2.5 text-xs bg-slate-50 font-medium">
+            <option value="2 Adults (Couple)">2 Adults (Couple)</option>
+            <option value="Family (3-4 Pax)">Family (3 - 4 Pax)</option>
+            <option value="Family / Group (5-7 Pax)">Family / Group (5 - 7 Pax)</option>
+            <option value="Large Group (8+ Pax)">Large Group (8+ Pax)</option>
+          </select>
+        </div>
+        <div>
+          <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Vehicle Type</label>
+          <select id="tourVehicle" class="w-full border border-slate-200 rounded-xl p-2.5 text-xs bg-slate-50 font-medium">
+            <option value="Innova Crysta / Luxury SUV">Innova Crysta / Luxury SUV</option>
+            <option value="Scorpio / Bolero (Hill Standard)">Scorpio / Bolero (Standard)</option>
+            <option value="Small Cab (Dzire / WagonR)">Small Cab (Dzire / WagonR)</option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Specific Requests (Permits / Special stops)</label>
+        <input type="text" id="tourNotes" placeholder="e.g. Need Nathula Pass permit assistance / senior citizens traveling" class="w-full border border-slate-200 rounded-xl p-2.5 text-xs bg-slate-50 font-medium" />
+      </div>
+
+      <button type="submit" class="w-full bg-indigo-900 hover:bg-indigo-950 text-white font-bold py-3.5 px-4 rounded-2xl flex items-center justify-center gap-2 shadow-sm transition active:scale-95">
+        <i class="fa-brands fa-whatsapp text-lg text-emerald-400"></i>
+        <span>Get Tour Quote & Permit Details on WhatsApp</span>
+      </button>
+    </form>
+
+    <!-- Trust Badges -->
+    <div class="px-5 pb-5">
+      <div class="flex items-center justify-around text-[11px] text-slate-500 bg-slate-50 py-2.5 rounded-xl border border-slate-100">
+        <span><i class="fa-solid fa-file-shield text-indigo-600 mr-1"></i>Permits Handled</span>
+        <span><i class="fa-solid fa-certificate text-indigo-600 mr-1"></i>Verified Guides & Cabs</span>
+        <span><i class="fa-solid fa-handshake text-indigo-600 mr-1"></i>Direct B2B Rates</span>
+      </div>
+    </div>
+  </div>
+
+  <footer class="text-center text-[11px] text-slate-400 mt-4">
+    PaharLink Network • Darjeeling, Sikkim, Siliguri, Bhutan & Nepal Border Transfers
+  </footer>
+
+  <script>
+    // Set default dates
+    document.getElementById('transferDate').valueAsDate = new Date();
+    document.getElementById('tourDate').valueAsDate = new Date();
+
+    // PUT YOUR OPERATIONAL WHATSAPP NUMBER HERE (e.g. 919800694698):
+    const DISPATCH_WHATSAPP_NUMBER = "919876543210";
+
+    function setMode(mode) {
+      const formTransfer = document.getElementById('formTransfer');
+      const formTour = document.getElementById('formTour');
+      const tabTransfer = document.getElementById('tabTransfer');
+      const tabTour = document.getElementById('tabTour');
+
+      if (mode === 'transfer') {
+        formTransfer.classList.remove('hidden');
+        formTour.classList.add('hidden');
+        tabTransfer.className = "flex-1 py-2.5 px-3 rounded-xl text-xs font-bold bg-indigo-900 text-white shadow-sm flex items-center justify-center gap-1.5 transition";
+        tabTour.className = "flex-1 py-2.5 px-3 rounded-xl text-xs font-bold bg-white text-slate-700 border border-slate-300 hover:bg-slate-100 flex items-center justify-center gap-1.5 transition";
+      } else {
+        formTour.classList.remove('hidden');
+        formTransfer.classList.add('hidden');
+        tabTour.className = "flex-1 py-2.5 px-3 rounded-xl text-xs font-bold bg-indigo-900 text-white shadow-sm flex items-center justify-center gap-1.5 transition";
+        tabTransfer.className = "flex-1 py-2.5 px-3 rounded-xl text-xs font-bold bg-white text-slate-700 border border-slate-300 hover:bg-slate-100 flex items-center justify-center gap-1.5 transition";
+      }
+    }
+
+    function sendTransferToWhatsApp(e) {
+      e.preventDefault();
+      const route = document.getElementById('transferRoute').value;
+      const date = document.getElementById('transferDate').value;
+      const time = document.getElementById('transferTime').value;
+      const flight = document.getElementById('transferFlight').value.trim() || 'Not specified';
+      const pax = document.getElementById('transferPax').value;
+      const bags = document.getElementById('transferBags').value;
+      const vehicle = document.getElementById('transferVehicle').value;
+
+      const message = 
+`🚖 *PAHARLINK: AIRPORT / RETURN CAB INQUIRY*
+━━━━━━━━━━━━━━━━━━
+📍 *Route:* ${route}
+📅 *Date:* ${date}
+⏰ *Time:* ${time}
+✈️ *Flight/Train:* ${flight}
+👥 *Travelers:* ${pax}
+🧳 *Baggage:* ${bags}
+🚘 *Vehicle:* ${vehicle}
+━━━━━━━━━━━━━━━━━━
+_Namaste, please confirm available return cab details and direct rate._`;
+
+      window.open(`https://wa.me/${DISPATCH_WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`, '_blank');
+    }
+
+    function sendTourToWhatsApp(e) {
+      e.preventDefault();
+      const pkg = document.getElementById('tourPackage').value;
+      const date = document.getElementById('tourDate').value;
+      const pickup = document.getElementById('tourPickup').value.trim();
+      const pax = document.getElementById('tourPax').value;
+      const vehicle = document.getElementById('tourVehicle').value;
+      const notes = document.getElementById('tourNotes').value.trim() || 'None';
+
+      const message = 
+`🏔️ *PAHARLINK: SIGHTSEEING / TOUR PACKAGE INQUIRY*
+━━━━━━━━━━━━━━━━━━
+📍 *Package:* ${pkg}
+📅 *Starting Date:* ${date}
+🏨 *Pickup From:* ${pickup}
+👥 *Group Size:* ${pax}
+🚘 *Vehicle:* ${vehicle}
+📝 *Notes / Permit requests:* ${notes}
+━━━━━━━━━━━━━━━━━━
+_Namaste, please share package tariff, vehicle details, and permit guidelines._`;
+
+      window.open(`https://wa.me/${DISPATCH_WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`, '_blank');
+    }
+  </script>
+</body>
+</html>
